@@ -5,7 +5,7 @@ import 'package:todo/app/core/utils/keys.dart';
 import 'package:todo/app/data/models/task.dart';
 import 'package:todo/app/data/service.dart';
 
-class TaslProvider{
+class TaskProvider{
   final StorageServices _storageServices = Get.find<StorageServices>();
 
   List<Task> readTasks(){

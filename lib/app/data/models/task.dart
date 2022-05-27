@@ -1,19 +1,19 @@
 import 'package:equatable/equatable.dart';
+import 'package:flutter/cupertino.dart';
 
 class Task extends Equatable{
-  final String title;
-  final int icon;
-  final String color;
+  final String? title;
+  final IconData? icon;
+  final Color? color;
   final List<dynamic>? todos;
 
   const Task(
-      {required this.title,
-      required this.icon,
-      required this.color,
-      required this.todos});
+      { this.title,
+       this.icon,
+       this.color, this.todos});
 
   Task copyWith(
-          {String? title, int? icon, String? color, List<dynamic>? todos}) =>
+          {String? title, IconData? icon, Color? color, List<dynamic>? todos}) =>
       Task(
           title: title ?? this.title,
           icon: icon ?? this.icon,
