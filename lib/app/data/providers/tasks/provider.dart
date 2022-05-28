@@ -14,6 +14,6 @@ class TaskProvider{
     return tasks;
   }
   void writeTasks(List<Task> tasks){
-    _storageServices.write(taskKey, jsonEncode(tasks));
+    _storageServices.write(taskKey, tasks);
   }
 }

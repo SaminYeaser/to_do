@@ -81,12 +81,13 @@ class AddCard extends StatelessWidget {
                                   icons[homeController.chipIndex.value].icon!;
                               Color color =
                                   icons[homeController.chipIndex.value].color!;
-                              var task = Task(
+                              var _task = Task(
                                   title: homeController.editController.text,
                                   icon: icon,
                                   color: color);
                               Get.back();
-                              homeController.addTask(task)
+                              print('add task $_task');
+                              homeController.addTask(_task)
                                   ? EasyLoading.showSuccess('Task Created')
                                   : EasyLoading.showError('Duplicate Task');
                             }
