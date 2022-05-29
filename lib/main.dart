@@ -9,6 +9,7 @@ import 'onboarding.dart';
 
 void main()async {
   await GetStorage.init();
+  await GetStorage.init('onBoarding');
   await Get.putAsync(() => StorageServices().init());
   runApp( MyApp());
 }
@@ -19,15 +20,18 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GetMaterialApp(
-      initialBinding: HomeBinding(),
+
       debugShowCheckedModeBanner: false,
       title: 'To Do Application',
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: onBoardingSituation.read('onBoarding') == false ?
-       Home() :  const Onboarding(),
+      home:
+      // onBoardingSituation.read('onBoarding') == false ?
+       Home() ,
+          // :  const Onboarding(),
       builder: EasyLoading.init(),
+      initialBinding: HomeBinding(),
     );
   }
 }

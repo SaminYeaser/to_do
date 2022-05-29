@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 import 'package:step_progress_indicator/step_progress_indicator.dart';
 import 'package:todo/app/core/utils/extension.dart';
 import 'package:todo/app/modules/details/widgets/doing_list.dart';
+import 'package:todo/app/modules/details/widgets/done_list.dart';
 import 'package:todo/app/modules/home/controller.dart';
 
 class DetailsPage extends StatelessWidget {
@@ -117,7 +118,8 @@ class DetailsPage extends StatelessWidget {
               ),
             ),
             SizedBox(height: 50,),
-            DoingList()
+            DoingList(),
+            DoneList()
           ],
         ),
       ),

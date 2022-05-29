@@ -10,7 +10,8 @@ class TaskProvider{
 
   List<Task> readTasks(){
     var tasks = <Task>[];
-    jsonDecode(_storageServices.read(taskKey).toString()).forEach((e)=> tasks.add(Task.formJson(e)));
+    jsonDecode(_storageServices.read(taskKey).toString()).forEach((e)=>
+        tasks.add(Task.fromJson(e)));
     return tasks;
   }
   void writeTasks(List<Task> tasks){

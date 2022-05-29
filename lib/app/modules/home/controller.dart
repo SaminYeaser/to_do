@@ -16,10 +16,11 @@ class HomeController extends GetxController{
   final task = Rx<Task?>(null);
   final doingTodos = <dynamic>[].obs;
   final doneTodos = <dynamic>[].obs;
+  final tabIndex = 0.obs;
   @override
   void onInit() {
     tasks.assignAll(taskRepository.readTask()!);
-    ever(tasks, (_) => taskRepository.writeTask(tasks));
+    // ever(tasks, (_) => taskRepository.writeTask(tasks));
     super.onInit();
   }
 
@@ -32,6 +33,9 @@ class HomeController extends GetxController{
     chipIndex.value = value;
   }
 
+  void changetabIndex(int index){
+    tabIndex.value = index;
+  }
   bool updateTask(Task task, String title){
     var todos = task.todos ?? [];
     if(containeTodo(todos, title)){
@@ -83,6 +87,26 @@ class HomeController extends GetxController{
     tasks[oldIndex] = newTask;
     tasks.refresh();
   }
+  void deleteDoneTodo(dynamic doneTodo){
+    int index = doneTodos.indexWhere((element) => mapEquals<String, dynamic>(doneTodo, element));
+    doneTodos.removeAt(index);
+    doneTodos.refresh();
+  }
+
+  bool isTodosEmpty(Task task){
+    return task.todos == null || task.todos!.isEmpty;
+  }
+
+  int getDoneTodo(Task task){
+    var res = 0;
+    for(int i=1;i<task.todos!.length;i++){
+      if(task.todos![i]['done'] == true){
+        res += 1;
+      }
+    }
+    return res;
+  }
+
   bool containeTodo(List todos, String title){
     return todos.any((element) => element['title'] == title);
   }
@@ -106,11 +130,36 @@ class HomeController extends GetxController{
   bool addTask(Task task){
     if(tasks.contains(task)){
       return false;
+    }else{
+      tasks.add(task);
+      return true;
     }
-    tasks.add(task);
-    return true;
+
   }
   void deleteTask(Task task){
     tasks.remove(task);
+  }
+
+  int getTotalTask(){
+    var res = 0;
+    for(int i=0;i<tasks.length;i++){
+      if(tasks[i].todos != null){
+        res += tasks[i].todos!.length;
+      }
+    }
+    return res;
+  }
+  int getTotalDoneTask(){
+    var res = 0;
+    for(int i=0;i<tasks.length;i++){
+      if(tasks[i].todos != null){
+        for(int j=0;j<tasks[i].todos!.length;j++){
+          if(tasks[i].todos![j]['done'] == true){
+            res += 1;
+          }
+        }
+      }
+    }
+    return res;
   }
 }
